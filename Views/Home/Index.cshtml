@@ -1,0 +1,41 @@
+﻿<!-- Views/Home/Index.cshtml -->
+@model List<HotelBooking.Models.RoomType>
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<div class="jumbotron bg-light p-5 rounded mt-4">
+    <h1 class="display-4">Chào mừng đến với Hotel Booking!</h1>
+    <p class="lead">Tìm và đặt phòng khách sạn tốt nhất cho kỳ nghỉ của bạn</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="@Url.Action("Create", "Booking")" role="button">
+        <i class="fas fa-calendar-check"></i> Đặt phòng ngay
+    </a>
+</div>
+
+<h2 class="mt-5 mb-4">Các loại phòng của chúng tôi</h2>
+<div class="row">
+    @foreach (var room in Model)
+    {
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <img src="@(string.IsNullOrEmpty(room.ImageUrl) ? "https://via.placeholder.com/400x250?text=Hotel+Room" : room.ImageUrl)"
+                     class="card-img-top" alt="@room.TypeName" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@room.TypeName</h5>
+                    <p class="card-text">@room.Description</p>
+                    <p class="card-text">
+                        <i class="fas fa-users"></i> Sức chứa: @room.Capacity người
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="price-badge">@room.Price.ToString("N0") VNĐ</span>
+                        <a href="@Url.Action("RoomDetails", "Home", new { id = room.RoomTypeID })"
+                           class="btn btn-primary">
+                            Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

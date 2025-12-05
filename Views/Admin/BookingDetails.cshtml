@@ -1,0 +1,78 @@
+﻿@model HotelBooking.Models.Booking
+@{
+    ViewBag.Title = "Chi tiết đặt phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết đặt phòng #@Model.BookingID</h2>
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Thông tin khách hàng</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Tên:</strong> @Model.CustomerName</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>Điện thoại:</strong> @Model.Phone</p>
+                <p><strong>Số khách:</strong> @Model.NumberOfGuests người</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">Thông tin đặt phòng</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Loại phòng:</strong> @Model.RoomType.TypeName</p>
+                <p><strong>Check-in:</strong> @Model.CheckInDate.ToString("dd/MM/yyyy")</p>
+                <p><strong>Check-out:</strong> @Model.CheckOutDate.ToString("dd/MM/yyyy")</p>
+                <p><strong>Tổng tiền:</strong> <span class="text-success">@Model.TotalPrice.ToString("N0") VNĐ</span></p>
+                <p><strong>Trạng thái:</strong> @Model.Status</p>
+                <p><strong>Ngày đặt:</strong> @Model.BookingDate.ToString("dd/MM/yyyy HH:mm")</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.SpecialRequests))
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Yêu cầu đặc biệt</h5>
+        </div>
+        <div class="card-body">
+            <p>@Model.SpecialRequests</p>
+        </div>
+    </div>
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Cập nhật trạng thái</h5>
+    </div>
+    <div class="card-body">
+        <form method="post" action="@Url.Action("UpdateBookingStatus", new { id = Model.BookingID })">
+            @Html.AntiForgeryToken()
+            <div class="btn-group">
+                <button type="submit" name="status" value="Confirmed" class="btn btn-success">
+                    <i class="fas fa-check"></i> Xác nhận
+                </button>
+                <button type="submit" name="status" value="Cancelled" class="btn btn-danger">
+                    <i class="fas fa-times"></i> Hủy
+                </button>
+                <button type="submit" name="status" value="Completed" class="btn btn-primary">
+                    <i class="fas fa-flag-checkered"></i> Hoàn thành
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<a href="@Url.Action("Bookings")" class="btn btn-secondary mt-3">
+    <i class="fas fa-arrow-left"></i> Quay lại
+</a>

@@ -1,0 +1,74 @@
+﻿@model List<HotelBooking.Models.Booking>
+@{
+    ViewBag.Title = "Quản lý đặt phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản lý đặt phòng</h2>
+<hr>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách hàng</th>
+                    <th>Loại phòng</th>
+                    <th>Check-in</th>
+                    <th>Check-out</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+                    <tr>
+                        <td>@booking.BookingID</td>
+                        <td>
+                            @booking.CustomerName<br>
+                            <small class="text-muted">@booking.Phone</small>
+                        </td>
+                        <td>@booking.RoomType.TypeName</td>
+                        <td>@booking.CheckInDate.ToString("dd/MM/yyyy")</td>
+                        <td>@booking.CheckOutDate.ToString("dd/MM/yyyy")</td>
+                        <td>@booking.TotalPrice.ToString("N0") VNĐ</td>
+                        <td>
+                            @if (booking.Status == "Pending")
+                            {
+                                <span class="badge bg-warning">Chờ xác nhận</span>
+                            }
+                            else if (booking.Status == "Confirmed")
+                            {
+                                <span class="badge bg-success">Đã xác nhận</span>
+                            }
+                            else if (booking.Status == "Cancelled")
+                            {
+                                <span class="badge bg-danger">Đã hủy</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">@booking.Status</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a href="@Url.Action("BookingDetails", new { id = booking.BookingID })"
+                                   class="btn btn-sm btn-info">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="@Url.Action("DeleteBooking", new { id = booking.BookingID })"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

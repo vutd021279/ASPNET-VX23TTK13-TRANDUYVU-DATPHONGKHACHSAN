@@ -1,0 +1,36 @@
+﻿<!-- Views/Home/RoomDetails.cshtml -->
+@model HotelBooking.Models.RoomType
+@{
+    ViewBag.Title = Model.TypeName;
+}
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <img src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "https://via.placeholder.com/600x400?text=Hotel+Room" : Model.ImageUrl)"
+             class="img-fluid rounded" alt="@Model.TypeName">
+    </div>
+    <div class="col-md-6">
+        <h1>@Model.TypeName</h1>
+        <hr>
+        <p class="lead">@Model.Description</p>
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Thông tin phòng</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-users text-primary"></i> Sức chứa: <strong>@Model.Capacity người</strong></li>
+                    <li class="mt-2"><i class="fas fa-door-open text-primary"></i> Phòng trống: <strong>@ViewBag.AvailableRooms phòng</strong></li>
+                    <li class="mt-2"><i class="fas fa-tag text-primary"></i> Giá: <span class="price-badge">@Model.Price.ToString("N0") VNĐ / đêm</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="@Url.Action("Create", "Booking", new { roomTypeID = Model.RoomTypeID })"
+           class="btn btn-success btn-lg w-100">
+            <i class="fas fa-calendar-check"></i> Đặt phòng ngay
+        </a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary w-100 mt-2">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+</div>

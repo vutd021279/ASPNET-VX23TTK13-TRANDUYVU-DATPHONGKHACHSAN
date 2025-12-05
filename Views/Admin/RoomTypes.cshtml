@@ -1,0 +1,51 @@
+﻿<!-- Views/Admin/RoomTypes.cshtml -->
+@model List<HotelBooking.Models.RoomType>
+@{
+    ViewBag.Title = "Quản lý loại phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Quản lý loại phòng</h2>
+    <a href="@Url.Action("CreateRoomType")" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm loại phòng
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên loại phòng</th>
+                    <th>Giá (VNĐ)</th>
+                    <th>Sức chứa</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var room in Model)
+                {
+                    <tr>
+                        <td>@room.RoomTypeID</td>
+                        <td>@room.TypeName</td>
+                        <td>@room.Price.ToString("N0")</td>
+                        <td>@room.Capacity người</td>
+                        <td>
+                            <a href="@Url.Action("EditRoomType", new { id = room.RoomTypeID })"
+                               class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i> Sửa
+                            </a>
+                            <a href="@Url.Action("DeleteRoomType", new { id = room.RoomTypeID })"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Bạn có chắc muốn xóa?')">
+                                <i class="fas fa-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿<!-- Views/Admin/Dashboard.cshtml -->
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Dashboard</h2>
+<hr>
+
+<div class="row mt-4">
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Loại phòng</h5>
+                <h2>@ViewBag.TotalRoomTypes</h2>
+                <a href="@Url.Action("RoomTypes")" class="text-white">Xem chi tiết →</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Đặt phòng</h5>
+                <h2>@ViewBag.TotalBookings</h2>
+                <a href="@Url.Action("Bookings")" class="text-white">Xem chi tiết →</a>
+            </div>
+        </div>
+    </div>
+</div>
