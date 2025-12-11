@@ -2,18 +2,18 @@
 1. Tên Project:  Chuyên đề ASP.NET_Xây dựng website đặt phòng khách sạn (Hotel Booking System)
 Web đặt phòng khách sạn (HOTEL BOOKING) được phát triển bằng ASP.NET MVC và SQL Server.
 2. Tác giả:
-Họ và tên: Trần Duy Vũ
-Email: vutd021279@tvu-onschool.edu.vn
-Số điện thoại: 0933927941
-MSSV: 470123184
-Lớp: VX23TTK13
+# Họ và tên: Trần Duy Vũ
+# Email: vutd021279@tvu-onschool.edu.vn
+# Số điện thoại: 0933927941
+# MSSV: 470123184
+# Lớp: VX23TTK13
 3. Tính năng:
-Người dùng:
+# Người dùng:
 - Xem danh sách các loại phòng
 - Xem chi tiết phòng (giá, sức chứa, tiện nghi)
 - Đặt phòng trực tuyến
 - Nhận xác nhận đặt phòng
-Quản trị viên:
+# Quản trị viên:
 - Đăng nhập hệ thống
 - Quản lý loại phòng (Thêm/Sửa/Xóa)
 - Xem danh sách đặt phòng
